@@ -1,0 +1,149 @@
+ body{
+    height:100%;
+    width:100%;
+    font-family: "Microsoft YaHei";
+    }
+    span,select,a,img,button{
+	cursor:pointer;
+}
+ .top_right a{
+    font-size: 16px;
+    color: #5aa3d0;
+    font-weight: bolder;
+    margin-right: 0;
+    padding-right: 5px;
+    border-right: none;
+    text-decoration-line: none;
+    -moz-text-decoration-line: none;
+}
+.bg{
+    height: 80%;
+    position: relative;
+}
+.bg img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.reg_border{
+    border: 2px solid #dddddd;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1% 1% 2%;
+    /*width: 24%;*/
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size:0.8rem;
+
+}
+.reg_top{
+    border-bottom: 3px solid #5ba2cf;
+    color: #5ba2cf;
+    font-size: 1rem;
+    padding: 10px;
+}
+.btnLogin{
+    background-color: #5ba2cf;
+    border-radius: 5px;
+    margin-top: 35px;
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    color: white;font-weight: bolder;
+    font-size: 0.8rem;
+}
+.tologin{
+    color: #fc4c1f;
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    text-decoration-line: none;
+    -moz-text-decoration-line: none;
+    font-size: 0.8rem;
+}
+
+
+
+
+
+/*注册*/
+
+.div_item{
+    display: flex;
+    display: -webkit-flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+.div_item_margin{
+    margin: 0.5rem 0;
+}
+.item_grow{
+     flex: 1;
+}
+input{
+    width: 100%;
+    font-size: 0.8rem;
+}
+.code:after{
+    clear: both;
+    content: '';
+    display: block;
+}
+.getCode{
+    color: white;
+    background-color: #5ba2cf;
+    margin-left: 15px;
+    border-radius: 5px;
+    width: 100px;
+    height: 2rem;
+    font-size:0.8rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
+/*登录*/
+.login_border{
+    border: 2px solid #dddddd;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1% 1% 2%;
+    width: 24%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size:0.8rem;
+}
+.lables{
+    margin: 15px 0;
+}
+.login_item{
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    background-color: #f7f7f7;
+    height: 45px;
+}
+.img_div{
+    width: 15%;
+}
+.img_div img{
+    width: 20px;
+    height: 20px;
+    margin: 12px 10px;
+}
+.login_input{
+    border: none;
+    width: 85%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.login_item:after{
+    clear: both;
+    content: '';
+    display: block;
+}

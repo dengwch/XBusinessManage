@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommoditySpecificationMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_COMMODITYSPECIFICATION(
+			COMMODITY_ID,	
+			SPECIFICATIONSLIST,	
+			STOCK,	
+			PRICE,	
+			BUSINESSUSER_ID,
+			COMMODITYSPECIFICATION_ID
+		) values (
+			#{COMMODITY_ID},	
+			#{SPECIFICATIONSLIST},	
+			#{STOCK},	
+			#{PRICE},	
+			#{BUSINESSUSER_ID},
+			#{COMMODITYSPECIFICATION_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_COMMODITYSPECIFICATION
+		where 
+			COMMODITYSPECIFICATION_ID = #{COMMODITYSPECIFICATION_ID}
+	</delete>
+	<!-- 删除-->
+	<delete id="deleteById" parameterType="pd">
+		delete from TB_COMMODITYSPECIFICATION
+		where 
+			COMMODITY_ID = #{COMMODITY_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_COMMODITYSPECIFICATION
+			set 
+				COMMODITY_ID = #{COMMODITY_ID},
+				SPECIFICATIONSLIST = #{SPECIFICATIONSLIST},
+				STOCK = #{STOCK},
+				PRICE = #{PRICE},
+			COMMODITYSPECIFICATION_ID = COMMODITYSPECIFICATION_ID
+			where 
+				COMMODITYSPECIFICATION_ID = #{COMMODITYSPECIFICATION_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			COMMODITY_ID,	
+			SPECIFICATIONSLIST,	
+			STOCK,	
+			PRICE,	
+			COMMODITYSPECIFICATION_ID
+		from 
+			TB_COMMODITYSPECIFICATION
+		where 
+			COMMODITYSPECIFICATION_ID = #{COMMODITYSPECIFICATION_ID}
+			
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.COMMODITY_ID,	
+				a.SPECIFICATIONSLIST,	
+				a.STOCK,	
+				a.PRICE,	
+				a.COMMODITYSPECIFICATION_ID
+		from 
+				TB_COMMODITYSPECIFICATION a where a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.COMMODITY_ID,	
+				a.SPECIFICATIONSLIST,	
+				a.STOCK,	
+				a.PRICE,	
+				a.COMMODITYSPECIFICATION_ID
+		from 
+				TB_COMMODITYSPECIFICATION a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_COMMODITYSPECIFICATION
+		where 
+			COMMODITYSPECIFICATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

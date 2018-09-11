@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LogisticsListMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_LOGISTICSLIST(
+			AREAID,	
+			FIRSTHEAVY,	
+			FIRSTHEAVYPRICE,	
+			CONTINUEDHEAVY,	
+			CONTINUEDHEAVYPRICE,	
+			CREATETIME,	
+			LOGISTICS_ID,
+			BUSINESSUSER_ID,
+			LOGISTICSLIST_ID
+		) values (
+			#{AREAID},	
+			#{FIRSTHEAVY},	
+			#{FIRSTHEAVYPRICE},	
+			#{CONTINUEDHEAVY},	
+			#{CONTINUEDHEAVYPRICE},	
+			#{CREATETIME},	
+			#{LOGISTICS_ID},
+			#{BUSINESSUSER_ID},
+			#{LOGISTICSLIST_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_LOGISTICSLIST
+		where 
+			LOGISTICSLIST_ID = #{LOGISTICSLIST_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_LOGISTICSLIST
+			set 
+				AREAID = #{AREAID},
+				FIRSTHEAVY = #{FIRSTHEAVY},
+				FIRSTHEAVYPRICE = #{FIRSTHEAVYPRICE},
+				CONTINUEDHEAVY = #{CONTINUEDHEAVY},
+				CONTINUEDHEAVYPRICE = #{CONTINUEDHEAVYPRICE},
+			LOGISTICSLIST_ID = LOGISTICSLIST_ID
+			where 
+				LOGISTICSLIST_ID = #{LOGISTICSLIST_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			AREAID,	
+			FIRSTHEAVY,	
+			FIRSTHEAVYPRICE,	
+			CONTINUEDHEAVY,	
+			CONTINUEDHEAVYPRICE,	
+			CREATETIME,	
+			LOGISTICSLIST_ID
+		from 
+			TB_LOGISTICSLIST
+		where 
+			LOGISTICSLIST_ID = #{LOGISTICSLIST_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.AREAID,	
+				a.FIRSTHEAVY,	
+				a.FIRSTHEAVYPRICE,	
+				a.CONTINUEDHEAVY,	
+				a.CONTINUEDHEAVYPRICE,	
+				a.CREATETIME,	
+				a.LOGISTICSLIST_ID
+		from 
+				TB_LOGISTICSLIST a where a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.AREAID,	
+				a.FIRSTHEAVY,	
+				a.FIRSTHEAVYPRICE,	
+				a.CONTINUEDHEAVY,	
+				a.CONTINUEDHEAVYPRICE,	
+				a.CREATETIME,	
+				a.LOGISTICSLIST_ID
+		from 
+				TB_LOGISTICSLIST a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+		<!-- 列表(全部) -->
+	<select id="listAllById" parameterType="pd" resultType="pd">
+		select
+				a.AREAID,	
+				a.FIRSTHEAVY,	
+				a.FIRSTHEAVYPRICE,	
+				a.CONTINUEDHEAVY,	
+				a.CONTINUEDHEAVYPRICE,	
+				a.CREATETIME,	
+				a.LOGISTICSLIST_ID
+		from 
+				TB_LOGISTICSLIST a
+				where 
+				a.LOGISTICS_ID=#{LOGISTICS_ID}
+				and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_LOGISTICSLIST
+		where 
+			LOGISTICSLIST_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

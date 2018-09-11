@@ -1,0 +1,122 @@
+.header{
+    border-bottom: 5px solid #5aa3d0;
+    padding:0 10%;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-family: "微软雅黑","宋体";
+    background-color: white;
+    height:10%;
+}
+.header_left{
+    width: 60%;
+    flaot:left;
+}
+.header_left img{
+	float:left;
+    margin:1% 0;
+    width:8%;
+    height:8%;
+}
+.header_nav{
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    margin-left:2%;
+    margin-top:1.5%;	
+}
+.header_nav li{
+    height: 30px;
+    line-height: 30px;
+}
+.header_nav li p{
+    padding: 5px 15px;
+
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+/*鼠标滑动样式*/
+.header_nav li p a:hover{
+    color: #5aa3d0;
+    text-decoration-line: none;
+    font-weight: bold;
+
+}
+
+.header_nav li p a:active{
+    color: #5aa3d0;
+    font-weight: bold;
+}
+
+.child_goods_p:hover{
+    border: 1px solid #dddddd;
+}
+
+.child_store_p:hover{
+    border: 1px solid #dddddd;
+}
+.header_left ul li:hover ul{
+    display: block;
+}
+
+.header_right{
+    float: right;
+}
+.header_right span{
+    color: #fc4c1f;
+    border-right: 1px solid black;
+    padding-right: 10px;
+    margin-right: 15px;
+}
+.header_right img{
+    width: 25px;
+    height: 25px;
+}
+.header_right img:hover .child_setting{
+    display: block;
+}
+.child{
+    text-align: center;
+    font-size: 14px;
+    width: 96px;
+    position: relative;
+    z-index: 7;
+}
+.child li{
+    border: 1px solid #dddddd;
+    background: white;
+    height: 35px;
+    line-height: 30px;
+}
+.child li:hover{
+    background-color: #5aa3d0;
+    color: white;
+}
+.child li a:hover{
+    color: white;
+}
+.goodChild{
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+.storeChild{
+    top:0px;
+    left: 0px;
+    display: none;
+}
+.child_setting{
+    top: 10px;
+    right: -70px;
+    display: none;
+}

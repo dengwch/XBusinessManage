@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BusinessuserMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_BUSINESSUSER(
+			BUSINESSUSERNAME,	
+			BUSINESSPWD,	
+			TEL,	
+			COMPANYADDRESS,	
+			COMPANYNAME,	
+			BUSINESSLICENSEURL,	
+			SHOPNAME,	
+			SHOPADDRESS,	
+			SHOPLOGO,	
+			WORK,	
+			FLAG,	
+			CREATIME,
+			CONTACTSNAME,
+			SQFLAG,
+			ZCFLAG,
+			CLJG,
+			TYPE,
+			FBUSINESSUSER_ID,
+			FFLAG,
+			ZUIFLAG,
+			OPENID,
+			BUSINESSUSER_ID
+		) values (
+			#{BUSINESSUSERNAME},	
+			#{BUSINESSPWD},	
+			#{TEL},	
+			#{COMPANYADDRESS},	
+			#{COMPANYNAME},	
+			#{BUSINESSLICENSEURL},	
+			#{SHOPNAME},	
+			#{SHOPADDRESS},	
+			#{SHOPLOGO},	
+			#{WORK},	
+			#{FLAG},
+			#{CREATIME},
+			#{CONTACTSNAME},
+			#{SQFLAG},
+			#{ZCFLAG},
+			#{CLJG},	
+			#{TYPE},
+			#{FBUSINESSUSER_ID},
+			#{FFLAG},
+			#{ZUIFLAG},
+			#{OPENID},
+			#{BUSINESSUSER_ID}
+		)
+	</insert>
+	<!-- 新增-->
+	<insert id="savenotice" parameterType="pd">
+		insert into notice_msg(
+			TEXTMSG_ID,
+			KEYWORD,
+			CONTENT,
+			CREATETIME,
+			STATUS,
+			BUSINESSUSER_ID
+
+		) values (
+			#{TEXTMSG_ID},	
+			#{KEYWORD},	
+			#{CONTENT},	
+			#{CREATETIME},	
+			#{STATUS},	
+			#{BUSINESSUSER_ID}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="editZT" parameterType="pd">
+		update  TB_BUSINESSUSER
+			set 
+				FFLAG = #{FFLAG},
+			BUSINESSUSER_ID = BUSINESSUSER_ID
+			where 
+				BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	<!-- 修改 -->
+	<update id="editBUSINESSPWD" parameterType="pd">
+		update  TB_BUSINESSUSER
+			set 
+				BUSINESSPWD = #{BUSINESSPWD}
+			where 
+				BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	<!-- 修改OPENID -->
+	<update id="editOPENID" parameterType="pd">
+		update  tb_businessuser
+		<trim suffixOverrides=","> 
+    		<set > 
+			   <if test="BUSINESSUSERNAME != null and BUSINESSUSERNAME != ''" >
+        		BUSINESSUSERNAME = #{BUSINESSUSERNAME,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="BUSINESSPWD != null and BUSINESSPWD != ''" >
+        		BUSINESSPWD = #{BUSINESSPWD,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="TEL != null and TEL != ''" >
+        		TEL = #{TEL,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="COMPANYADDRESS != null and COMPANYADDRESS != ''" >
+        		COMPANYADDRESS = #{COMPANYADDRESS,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="COMPANYNAME != null and COMPANYNAME != ''" >
+        		COMPANYNAME = #{COMPANYNAME,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="BUSINESSLICENSEURL != null and BUSINESSLICENSEURL != ''" >
+        		BUSINESSLICENSEURL = #{BUSINESSLICENSEURL,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="SHOPNAME != null and SHOPNAME != ''" >
+        		SHOPNAME = #{SHOPNAME,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="SHOPADDRESS != null and SHOPADDRESS != ''" >
+        		SHOPADDRESS = #{SHOPADDRESS,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="SHOPLOGO != null and SHOPLOGO != ''" >
+        		SHOPLOGO = #{SHOPLOGO,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="WORK != null and WORK != ''" >
+        		WORK = #{WORK,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="FLAG != null and FLAG != ''" >
+        		FLAG = #{FLAG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="CREATIME != null and CREATIME != ''" >
+        		CREATIME = #{CREATIME,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="CONTACTSNAME != null and CONTACTSNAME != ''" >
+        		CONTACTSNAME = #{CONTACTSNAME,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="SQFLAG != null and SQFLAG != ''" >
+        		SQFLAG = #{SQFLAG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="ZCFLAG != null and ZCFLAG != ''" >
+        		ZCFLAG = #{ZCFLAG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="CLJG != null and CLJG != ''" >
+        		CLJG = #{CLJG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="VISITNUM != null and VISITNUM != ''" >
+        		VISITNUM = #{VISITNUM,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="TYPE != null and TYPE != ''" >
+        		TYPE = #{TYPE,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="FBUSINESSUSER_ID != null and FBUSINESSUSER_ID != ''" >
+        		FBUSINESSUSER_ID = #{FBUSINESSUSER_ID,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="FFLAG != null and FFLAG != ''" >
+        		FFLAG = #{FFLAG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="LONGITUDE != null and LONGITUDE != ''" >
+        		LONGITUDE = #{LONGITUDE,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="LATITUDE != null and LATITUDE != ''" >
+        		LATITUDE = #{LATITUDE,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="ZUIFLAG != null and ZUIFLAG != ''" >
+        		ZUIFLAG = #{ZUIFLAG,jdbcType=VARCHAR},
+      		   </if>
+			   <if test="OPENID != null and OPENID != ''" >
+        		OPENID = #{OPENID,jdbcType=VARCHAR}
+      		   </if>
+		 	</set>
+    	</trim>
+			where 
+    			BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_BUSINESSUSER
+		where 
+			BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="editbu" parameterType="pd">
+		update  TB_BUSINESSUSER
+			set 
+				TEL = #{TEL},
+				SHOPADDRESS = #{SHOPADDRESS},
+				COMPANYADDRESS = #{COMPANYADDRESS},
+				SHOPNAME = #{SHOPNAME},
+				BUSINESSLICENSEURL = #{BUSINESSLICENSEURL},
+				CONTACTSNAME=#{CONTACTSNAME},
+				ZCFLAG=#{ZCFLAG},
+				LONGITUDE=#{LONGITUDE},
+				LATITUDE=#{LATITUDE},
+			BUSINESSUSER_ID = BUSINESSUSER_ID
+			where 
+				BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	<!-- 修改 -->
+	<update id="editxx" parameterType="pd">
+		update  TB_BUSINESSUSER
+			set 
+				TEL = #{TEL},
+				SHOPNAME = #{SHOPNAME},
+				SHOPADDRESS = #{SHOPADDRESS},
+				SHOPLOGO = #{SHOPLOGO},
+				WORK = #{WORK},
+				COMPANYADDRESS = #{COMPANYADDRESS},
+			BUSINESSUSER_ID = BUSINESSUSER_ID
+			where 
+				BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_BUSINESSUSER
+			set 
+				BUSINESSUSERNAME = #{BUSINESSUSERNAME},
+				BUSINESSPWD = #{BUSINESSPWD},
+				TEL = #{TEL},
+				COMPANYADDRESS = #{COMPANYADDRESS},
+				COMPANYNAME = #{COMPANYNAME},
+				BUSINESSLICENSEURL = #{BUSINESSLICENSEURL},
+				SHOPNAME = #{SHOPNAME},
+				SHOPADDRESS = #{SHOPADDRESS},
+				SHOPLOGO = #{SHOPLOGO},
+				WORK = #{WORK},
+				FLAG = #{FLAG},
+				CONTACTSNAME=#{CONTACTSNAME},
+				SQFLAG=#{SQFLAG},
+				ZCFLAG=#{ZCFLAG},
+				CLJG=#{CLJG},
+			BUSINESSUSER_ID = BUSINESSUSER_ID
+			where 
+				BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			BUSINESSUSERNAME,	
+			BUSINESSPWD,	
+			TEL,	
+			COMPANYADDRESS,	
+			COMPANYNAME,	
+			BUSINESSLICENSEURL,	
+			SHOPNAME,	
+			SHOPADDRESS,	
+			SHOPLOGO,	
+			WORK,	
+			FLAG,	
+			CREATIME,
+			CONTACTSNAME,
+			SQFLAG,
+			ZCFLAG,
+			CLJG,
+			FBUSINESSUSER_ID,
+			FFLAG,
+			OPENID,
+			BUSINESSUSER_ID
+		from 
+			TB_BUSINESSUSER
+		where 1=1
+			
+			<if test="BUSINESSUSER_ID != null and BUSINESSUSER_ID != ''">
+				and BUSINESSUSER_ID = #{BUSINESSUSER_ID}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				and OPENID = #{OPENID}
+			</if>
+	</select>
+	<!-- 通过ID获取数据 -->
+	<select id="findByPhone" parameterType="pd" resultType="pd">
+		select 
+			BUSINESSUSERNAME,	
+			BUSINESSPWD,	
+			TEL,	
+			COMPANYADDRESS,	
+			COMPANYNAME,	
+			BUSINESSLICENSEURL,	
+			SHOPNAME,	
+			SHOPADDRESS,	
+			SHOPLOGO,	
+			WORK,	
+			FLAG,	
+			CREATIME,
+			CONTACTSNAME,
+			SQFLAG,
+			ZCFLAG,
+			CLJG,
+			FBUSINESSUSER_ID,
+			FFLAG,
+			OPENID,
+			BUSINESSUSER_ID
+		from 
+			TB_BUSINESSUSER
+		where 
+			TEL = #{TEL}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.BUSINESSUSERNAME,	
+				a.BUSINESSPWD,	
+				a.TEL,	
+				a.COMPANYADDRESS,	
+				a.COMPANYNAME,	
+				a.BUSINESSLICENSEURL,	
+				a.SHOPNAME,	
+				a.SHOPADDRESS,	
+				a.SHOPLOGO,	
+				a.WORK,	
+				a.FLAG,	
+				a.CREATIME,
+				a.CONTACTSNAME,
+				a.SQFLAG,
+				a.ZCFLAG,
+				a.CLJG,
+				a.FBUSINESSUSER_ID,
+				a.FFLAG,
+				a.OPENID,
+				a.BUSINESSUSER_ID
+		from 
+				TB_BUSINESSUSER a
+				where FBUSINESSUSER_ID=0
+				and FFLAG=1
+		
+		<if test="pd.FLAG!=null and pd.FLAG!=''">
+			and a.FLAG = #{pd.FLAG} 
+		</if>
+		<if test="pd.SQFLAG!=null and pd.SQFLAG!=''">
+			and a.SQFLAG = #{pd.SQFLAG} 
+		</if>
+		<if test="pd.ZCFLAG!=null and pd.ZCFLAG!=''">
+			and a.ZCFLAG = #{pd.ZCFLAG} 
+		</if>
+		<if test="pd.COMPANYNAME!=null and pd.COMPANYNAME!=''">
+			and a.COMPANYNAME = #{pd.COMPANYNAME} 
+		</if>
+		<if test="pd.BUSINESSUSERNAME!=null and pd.BUSINESSUSERNAME!=''">
+			and a.BUSINESSUSERNAME = #{pd.BUSINESSUSERNAME} 
+		</if>
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPageX" parameterType="page" resultType="pd">
+		select
+				a.BUSINESSUSERNAME,	
+				a.BUSINESSPWD,	
+				a.TEL,	
+				a.COMPANYADDRESS,	
+				a.COMPANYNAME,	
+				a.BUSINESSLICENSEURL,	
+				a.SHOPNAME,	
+				a.SHOPADDRESS,	
+				a.SHOPLOGO,	
+				a.WORK,	
+				a.FLAG,	
+				a.CREATIME,
+				a.CONTACTSNAME,
+				a.SQFLAG,
+				a.ZCFLAG,
+				a.CLJG,
+				a.FBUSINESSUSER_ID,
+				a.FFLAG,
+				a.OPENID,
+				a.BUSINESSUSER_ID
+		from 
+				TB_BUSINESSUSER a
+				where 1=1
+		
+		<if test="pd.BUSINESSUSER_ID!=null and pd.BUSINESSUSER_ID!=''">
+			and a.FBUSINESSUSER_ID = #{pd.BUSINESSUSER_ID} 
+		</if>
+		<if test="pd.SQFLAG!=null and pd.SQFLAG!=''">
+			and a.SQFLAG = #{pd.SQFLAG} 
+		</if>
+		<if test="pd.ZCFLAG!=null and pd.ZCFLAG!=''">
+			and a.ZCFLAG = #{pd.ZCFLAG} 
+		</if>
+		<if test="pd.COMPANYNAME!=null and pd.COMPANYNAME!=''">
+			and a.COMPANYNAME = #{pd.COMPANYNAME} 
+		</if>
+		<if test="pd.BUSINESSUSERNAME!=null and pd.BUSINESSUSERNAME!=''">
+			and a.BUSINESSUSERNAME = #{pd.BUSINESSUSERNAME} 
+		</if>
+	</select>
+	
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.BUSINESSUSERNAME,	
+				a.BUSINESSPWD,	
+				a.TEL,	
+				a.COMPANYADDRESS,	
+				a.COMPANYNAME,	
+				a.BUSINESSLICENSEURL,	
+				a.SHOPNAME,	
+				a.SHOPADDRESS,	
+				a.SHOPLOGO,	
+				a.WORK,	
+				a.FLAG,	
+				a.CREATIME,
+				a.CONTACTSNAME,
+				a.SQFLAG,
+				a.ZCFLAG,
+				a.CLJG,
+				a.FBUSINESSUSER_ID,
+				a.FFLAG,
+				a.OPENID,
+				a.BUSINESSUSER_ID
+		from 
+				TB_BUSINESSUSER a	
+				where 1=1
+				
+				<if test="TEL!=null and TEL!=''">
+				and a.TEL = #{TEL} 
+				</if>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_BUSINESSUSER
+		where 
+			BUSINESSUSER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

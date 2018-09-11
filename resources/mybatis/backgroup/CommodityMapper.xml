@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommodityMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_COMMODITY(
+			NAME,	
+			NUMBER,	
+			PRICE,	
+			STOCK,
+			WEIGHT,	
+			VOLUME,	
+			LOCATION,	
+			FREIGHTTEMPLATE,	
+			PERCENTAGECOMMISSIONFIR,	
+			PERCENTAGECOMMISSIONSEC,
+			TYPE,	
+			CREATETIME,
+			DETAIL,
+			GUIGE,
+			BUSSINESSACTIVITY_ID,
+			BUSINESSUSER_ID,
+			FLAG,
+			ZK,
+			WORDREMARK,
+			COMMODITY_ID
+		) values (
+			#{NAME},	
+			#{NUMBER},	
+			#{PRICE},	
+			#{STOCK},	
+			#{WEIGHT},	
+			#{VOLUME},	
+			#{LOCATION},	
+			#{FREIGHTTEMPLATE},	
+			#{PERCENTAGECOMMISSIONFIR},	
+			#{PERCENTAGECOMMISSIONSEC},
+			#{TYPE},
+			#{CREATETIME},	
+			#{DETAIL},
+			#{GUIGE},
+			#{BUSSINESSACTIVITY_ID},
+			#{BUSINESSUSER_ID},
+			#{FLAG},
+			#{ZK},
+			#{WORDREMARK},
+			#{COMMODITY_ID}
+		)
+	</insert>
+	<!-- 新增-->
+	<insert id="savetime" parameterType="pd">
+		insert into tb_ctime(
+			TID,
+			COMMODITY_ID,
+			CREATETIME,
+			BUSINESSUSER_ID
+		) values (
+			#{TID},	
+			#{COMMODITY_ID},	
+			#{CREATETIME},	
+			#{BUSINESSUSER_ID}
+		)
+	</insert>
+	<!-- 列表(全部) -->
+	<select id="listAlltime" parameterType="pd" resultType="pd">
+		select
+				*
+		from 
+				tb_ctime
+				where CREATETIME like CONCAT(CONCAT('%', #{CREATETIME}), '%')
+				and BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_COMMODITY
+		where 
+			COMMODITY_ID = #{COMMODITY_ID}
+	</delete>
+	
+	<!-- 列表(全部) -->
+	<select id="listAllshul" parameterType="pd" resultType="pd">
+		select
+				*
+		from 
+				TB_COMMODITY
+				where CREATETIME like CONCAT(CONCAT('%', #{CREATETIME}), '%')
+	</select>
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_COMMODITY
+			set 
+				NAME = #{NAME},
+				NUMBER = #{NUMBER},
+				PRICE = #{PRICE},
+				STOCK = #{STOCK},
+				WEIGHT = #{WEIGHT},
+				VOLUME = #{VOLUME},
+				LOCATION = #{LOCATION},
+				FREIGHTTEMPLATE = #{FREIGHTTEMPLATE},
+				PERCENTAGECOMMISSIONFIR = #{PERCENTAGECOMMISSIONFIR},
+				PERCENTAGECOMMISSIONSEC = #{PERCENTAGECOMMISSIONSEC},
+				TYPE = #{TYPE},
+				DETAIL=#{DETAIL},
+				GUIGE=#{GUIGE},
+				BUSSINESSACTIVITY_ID=#{BUSSINESSACTIVITY_ID},
+				FLAG=#{FLAG},
+				ZK=#{ZK},
+				WORDREMARK=#{WORDREMARK},
+			COMMODITY_ID = COMMODITY_ID
+			where 
+				COMMODITY_ID = #{COMMODITY_ID}
+	</update>
+	
+	<!-- 修改 -->
+	<update id="updateImg" parameterType="pd">
+		update  tb_commodityimg
+			set 
+				COMMODITY_ID=#{COMMODITY_ID}
+			where 
+				COMMODITY_ID = '0' 
+	</update>
+	
+		<!-- 修改 -->
+	<update id="updateSpe" parameterType="pd">
+		update  tb_specifications
+			set 
+				COMMODITY_ID=#{COMMODITY_ID}
+			where 
+				COMMODITY_ID = '0' 
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			a.NAME,	
+			a.NUMBER,	
+			a.PRICE,	
+			a.STOCK,	
+			a.WEIGHT,	
+			a.VOLUME,	
+			a.LOCATION,	
+			a.FREIGHTTEMPLATE,	
+			a.PERCENTAGECOMMISSIONFIR,	
+			a.PERCENTAGECOMMISSIONSEC,	
+			a.TYPE,	
+			a.GUIGE,
+			a.DETAIL,
+			a.COMMODITY_ID,
+			a.FLAG,
+			a.ZK,
+			b.CLASSIFICATION_ID,
+			b.CLASSIFICATIONRELATION_ID,
+			a.WORDREMARK,
+			a.BUSSINESSACTIVITY_ID
+			
+		from 
+			TB_COMMODITY a left join tb_classificationrelation b on a.COMMODITY_ID =b.COMMODITY_ID
+		where 
+			a.COMMODITY_ID = #{COMMODITY_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				(select b.NAME from tb_classification b, tb_classificationrelation c where a.COMMODITY_ID=c.COMMODITY_ID and c.CLASSIFICATION_ID=b.CLASSIFICATION_ID)as CLASSIFICATION_ID,
+				(select b.SUPERIOR from tb_classification b, tb_classificationrelation c where a.COMMODITY_ID=c.COMMODITY_ID and c.CLASSIFICATION_ID=b.CLASSIFICATION_ID)as SUPERIOR,
+				a.NAME,	
+				a.NUMBER,	
+				a.PRICE,	
+				a.STOCK,	
+				a.WEIGHT,	
+				a.VOLUME,
+				a.ZK,	
+				a.WORDREMARK,
+				(select b.AREA_NAME from td_area b where a.LOCATION =b.AREA_ID)as LOCATION,	
+				(select b.NAME from tb_logistics b where b.LOGISTICS_ID=a.FREIGHTTEMPLATE)as FREIGHTTEMPLATE,	
+				a.PERCENTAGECOMMISSIONFIR,	
+				a.PERCENTAGECOMMISSIONSEC,
+				a.TYPE,	
+				a.COMMODITY_ID,
+				a.FLAG,
+				b.ACTIVITYNAME 
+		from 
+				TB_COMMODITY a left join tb_bussinessactivity b on a.BUSSINESSACTIVITY_ID=b.BUSSINESSACTIVITY_ID 
+				
+				left join tb_classificationrelation q on a.COMMODITY_ID=q.COMMODITY_ID
+				left join tb_businessuser r on a.BUSINESSUSER_ID=r.BUSINESSUSER_ID
+				where a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+				<if test="pd.CLASSIFICATION_ID!=null and pd.CLASSIFICATION_ID!=''">
+				<!--  and q.CLASSIFICATION_ID in (#{pd.CLASSIFICATION_ID})-->
+				and q.CLASSIFICATION_ID =#{pd.CLASSIFICATION_ID}
+				</if>
+				<if test="pd.FLAG!=null and pd.FLAG!=''">
+				and a.FLAG =#{pd.FLAG}
+				</if>
+				<if test="pd.NAME!=null and pd.NAME!=''">
+				and a.NAME like CONCAT(CONCAT('%', #{pd.NAME}), '%')
+				</if>
+				order by a.CREATETIME desc
+	</select>
+	
+	<select id="findgoodsvisitList" parameterType="pd" resultType="pd">
+		select * from tb_goodsvisit  where 1=1
+		<if test="COMMODITY_ID != null and COMMODITY_ID != ''">
+				and GOODSID=#{COMMODITY_ID} 
+		</if> 
+		order by CREATETIME desc
+	</select>
+	<select id="findgoodscollectionList" parameterType="pd" resultType="pd">
+		select * from tb_collection  where TYPE=1
+		<if test="COMMODITY_ID != null and COMMODITY_ID != ''">
+				and COMMODITY_ID=#{COMMODITY_ID} 
+		</if> 
+		order by CREATETIME desc
+	</select>
+	
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.NAME,	
+				a.NUMBER,	
+				a.PRICE,	
+				a.STOCK,	
+				a.WEIGHT,	
+				a.VOLUME,	
+				a.LOCATION,	
+				a.FREIGHTTEMPLATE,	
+				a.PERCENTAGECOMMISSIONFIR,	
+				a.PERCENTAGECOMMISSIONSEC,
+				a.TYPE,	
+				a.FLAG,
+				a.ZK,
+				a.WORDREMARK,
+				a.COMMODITY_ID
+		from 
+				TB_COMMODITY a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAllcodes" parameterType="pd" resultType="pd">
+		select
+				*
+		from 
+				hcode where flag=1
+				order by createtime
+	</select>
+	<!-- 修改 -->
+	<update id="updatecodes" parameterType="pd">
+		update  hcode
+			set 
+				flag='2'
+			where 
+				codeid = #{codeid}
+	</update>
+	<!-- 列表(全部收藏) -->
+	<select id="listAllshou" parameterType="pd" resultType="pd">
+		select * from TB_COMMODITY a where a.COMMODITY_ID=#{COMMODITY_ID}
+	</select>
+	<!-- 列表(全部浏览) -->
+	<select id="listAllliu" parameterType="pd" resultType="pd">
+		select * from TB_COMMODITY a where a.COMMODITY_ID=#{COMMODITY_ID}
+	</select>
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_COMMODITY
+		where 
+			COMMODITY_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	<!-- 批量修改 -->
+	<update id="editFlag" parameterType="pd">
+		update  TB_COMMODITY
+			set 
+				FlAG = #{FlAG},
+			COMMODITY_ID = COMMODITY_ID
+			where 
+				COMMODITY_ID = #{COMMODITY_ID}
+	</update>
+</mapper>

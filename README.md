@@ -1,2 +1,1 @@
-# XBusinessManage
-商家PC端
+#XBusinessManage

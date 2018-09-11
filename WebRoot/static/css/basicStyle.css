@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    word-break: break-all;
+    -ms-word-break: break-all;
+    font-family: "Microsoft YaHei";
+
+}
+body{
+min-width:1280px;}
+span,select,a,img,button,input,.btnAddCoupons,.btn_div{
+	cursor:pointer;
+}
+.btnLogin,.getCode,.btnSearch{
+	cursor:pointer;
+}
+
+.lf{
+    float: left;
+}
+.rf{
+    float: right;
+}
+textarea:focus{
+    outline: none;
+}
+select:focus{
+    outline: none;
+}
+input:focus{
+    outline: none;
+}
+input{
+    padding: 0 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    line-height: 35px;
+    border:1px solid #ccc;
+    margin-right: 10px;
+}
+ul,li{
+    list-style: none;
+}
+
+body{
+    background-color: #f2f2f2;
+}
+.center_div{
+    background-color: white;
+    margin: 10px 110px;
+    padding: 35px;
+    min-height: 730px;
+}
+a{
+    text-decoration-line: none;
+    text-decoration: none;
+    color: black;
+}
+.header_right>ul{
+	position:absolute;
+	top:40px;
+	right:100px;}

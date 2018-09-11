@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApproveDistributionMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into te_distribution(
+			PHONE,	
+			CARDNO,	
+			DISTRIBUTIONNAME,	
+			CARDZHENGIMG,	
+			CARDFANIMG,	
+			BUSINESSUSER_ID,
+			APPROVEDISTRIBUTION_ID
+		) values (
+			#{PHONE},	
+			#{CARDNO},	
+			#{DISTRIBUTIONNAME},	
+			#{CARDZHENGIMG},	
+			#{CARDFANIMG},	
+			#{BUSINESSUSER_ID},
+			#{APPROVEDISTRIBUTION_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from te_distribution
+		where 
+			APPROVEDISTRIBUTION_ID = #{APPROVEDISTRIBUTION_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  te_distribution
+			set 
+				APPROVETYPE = #{APPROVETYPE}
+			where 
+				APPROVEDISTRIBUTION_ID = #{APPROVEDISTRIBUTION_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			PHONE,	
+			CARDNO,	
+			DISTRIBUTIONNAME,	
+			CARDZHENGIMG,	
+			CARDFANIMG,	
+			APPROVEDISTRIBUTION_ID,
+			APPROVETYPE
+		from 
+			te_distribution
+		where 
+			APPROVEDISTRIBUTION_ID = #{APPROVEDISTRIBUTION_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.PHONE,	
+				a.CARDNO,	
+				a.DISTRIBUTIONNAME,	
+				a.CARDZHENGIMG,	
+				a.CARDFANIMG,	
+				a.APPROVEDISTRIBUTION_ID,
+				a.APPROVETYPE
+		from 
+				te_distribution a
+				where  1=1
+				and a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+				<if test="pd.DISTRIBUTIONNAME != null and pd.DISTRIBUTIONNAME != ''">
+				and a.DISTRIBUTIONNAME like CONCAT(CONCAT('%', #{pd.DISTRIBUTIONNAME}),'%') 
+				</if>
+				<if test="pd.PHONE != null and pd.PHONE != ''">
+				and a.PHONE like CONCAT(CONCAT('%', #{pd.PHONE}),'%') 
+				</if>
+				<if test="pd.APPROVETYPE != null and pd.APPROVETYPE != ''">
+				and a.APPROVETYPE = #{pd.APPROVETYPE}
+				</if>
+				
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAllPhone" parameterType="pd" resultType="pd">
+		select
+				 DISTINCT PHONE 
+		from 
+				te_distribution a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	<select id="listAllName" parameterType="pd" resultType="pd">
+		select
+				 DISTINCT DISTRIBUTIONNAME 
+		from 
+				te_distribution a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				 APPROVEDISTRIBUTION_ID,
+				PHONE,
+				CARDNO,
+				DISTRIBUTIONNAME,
+				CARDZHENGIMG,
+				CARDFANIMG,
+				CREATETIME,
+				APPROVETYPE
+
+		from 
+				te_distribution a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from te_distribution
+		where 
+			APPROVEDISTRIBUTION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

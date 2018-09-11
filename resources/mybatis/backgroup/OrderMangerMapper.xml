@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMangerMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into tb_order(
+			EXPRESSPRICE,	
+			SUMPRICE,	
+			ADDRESSID,	
+			REMARK,	
+			CREATEVIPID,	
+			CREATETIME,	
+			RETURNURL,	
+			RETURNTYPE,	
+			RETURN_REMARK,	
+			CHECK_REMARK,	
+			ORDERTYPE,	
+			RETURN_TYPE,	
+			FLAG,	
+			PAYNO,	
+			PAYTYPE,	
+			RETURNTIME,	
+			BUSINESSUSER_ID,
+			ORDER_ID
+		) values (
+			#{EXPRESSPRICE},	
+			#{SUMPRICE},	
+			#{ADDRESSID},	
+			#{REMARK},	
+			#{CREATEVIPID},	
+			#{CREATETIME},	
+			#{RETURNURL},	
+			#{RETURNTYPE},	
+			#{RETURN_REMARK},	
+			#{CHECK_REMARK},	
+			#{ORDERTYPE},	
+			#{RETURN_TYPE},	
+			#{FLAG},	
+			#{PAYNO},	
+			#{PAYTYPE},	
+			#{RETURNTIME},	
+			#{BUSINESSUSER_ID},
+			#{ORDER_ID}
+		)
+	</insert>
+	
+	<!-- 新增-->
+	<insert id="saveDEIMG" parameterType="pd">
+		insert into tb_ordercommodityimg(
+			ORDERCOMMODITYIMG_ID,
+			ORDERCOMMODITY_ID,
+			IMGURL,
+			WEIGHT,
+			BUSINESSUSER_ID,
+			CREATETIME
+
+		) values (
+			#{ORDERCOMMODITYIMG_ID},	
+			#{ORDERCOMMODITY_ID},	
+			#{IMGURL},	
+			#{WEIGHT},
+			#{BUSINESSUSER_ID},
+			#{CREATETIME}
+			
+		)
+	</insert>
+	
+	
+	<!-- 列表(全部) -->
+	<select id="listAllDEIMG" parameterType="pd" resultType="pd">
+		select
+				ORDERCOMMODITYIMG_ID,	
+				ORDERCOMMODITY_ID,	
+				IMGURL,	
+				WEIGHT,	
+				BUSINESSUSER_ID,	
+				CREATETIME
+		from 
+				tb_ordercommodityimg where BUSINESSUSER_ID=#{BUSINESSUSER_ID} and ORDERCOMMODITY_ID=#{COMMODITY_ID}
+				order by CREATETIME
+	</select>
+	
+	<!-- 删除-->
+	<delete id="deleteDEIMG" parameterType="pd">
+		delete from tb_ordercommodityimg
+		where 
+			ORDERCOMMODITYIMG_ID = #{ORDERCOMMODITYIMG_ID}
+	</delete>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from tb_order
+		where 
+			ORDER_ID = #{ORDER_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="editExpress" parameterType="pd">
+		update  tb_expressorder
+			set 
+				EXPRESSNO = #{EXPRESSNO},
+				EXPRESSCOMPANY = #{EXPRESSCOMPANY},
+				EXPRESSCOMPANYNAME=#{EXPRESSCOMPANYNAME}			
+			where 
+				EXPRESSORDER_ID = #{EXPRESSORDER_ID}
+	</update>
+		<!-- 修改订单状态 -->
+	<update id="editOrderType" parameterType="pd">
+		update  tb_order
+			set 
+				ORDERTYPE = #{ORDERTYPE}			
+			where 
+				ORDER_ID = #{ORDER_ID}
+	</update>
+	
+		<!-- 修改退款退货订单状态 -->
+	<update id="editReturnType" parameterType="pd">
+		update  tb_order
+			set 
+				RETURN_TYPE = #{RETURN_TYPE}			
+			where 
+				ORDER_ID = #{ORDER_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findByIdExpress" parameterType="pd" resultType="pd">
+		select 
+			EXPRESSORDER_ID,	
+			EXPRESSNO,	
+			EXPRESSCOMPANY,
+			ORDERID
+		from 
+			tb_expressorder
+		where 1=1 
+		<if test="ORDERID !=null and ORDERID !=''">
+		and ORDERID = #{ORDERID}
+		</if>
+		<if test="EXPRESSORDER_ID !=null and EXPRESSORDER_ID !=''">
+		and EXPRESSORDER_ID = #{EXPRESSORDER_ID}
+		</if>
+			
+	</select>
+	
+	
+	
+	<!-- 新增-->
+	<insert id="saveExpress" parameterType="pd">
+		insert into tb_expressorder(
+			EXPRESSORDER_ID,
+			USERADDRESS_ID,
+			ORDERID,
+			EXPRESSNO,
+			EXPRESSCOMPANY,
+			EXPRESSCOMPANYNAME,
+			CREATETIME
+
+		) values (
+			#{EXPRESSORDER_ID},
+			#{USERADDRESS_ID},
+			#{ORDERID},
+			#{EXPRESSNO},
+			#{EXPRESSCOMPANY},
+			#{EXPRESSCOMPANYNAME},
+			#{CREATETIME}
+		)
+	</insert>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findByIdAddress" parameterType="pd" resultType="pd">
+		select
+				a.ORDER_ID,
+				a.PAYNO,
+				a.SUMPRICE,
+				c.TEL,
+				c.NAME,
+				a.ORDERTYPE,
+				a.RETURN_TYPE,
+				b.EXPRESSORDER_ID,
+				d.AREA_NAME as PROVINCE,
+				e.AREA_NAME as CITY,
+				f.AREA_NAME as AREA,
+				c.ADDRESS,
+				b.EXPRESSNO,
+				b.EXPRESSCOMPANYNAME,
+				a.ORDERTYPE,
+				a.ADDRESSID,
+				a.RETURN_REMARK,
+				b.RETURNEXPRESSAGENAME,
+				b.RETURNEXPRESSAGENO,
+				b.RETURNEXPRESSAGEURL,
+				CASE
+				WHEN a.return_type = 0 AND a.ordertype = 0 THEN
+					'待付款'
+				WHEN a.return_type = 0 AND a.ordertype = 1 THEN
+					'已取消订单'
+				WHEN a.return_type = 0 AND a.ordertype = 2 THEN
+					'待发货'
+				WHEN a.return_type = 0 AND a.ordertype = 3 THEN
+					'已发货'
+				WHEN a.return_type = 0 AND a.ordertype = 4 THEN
+					'确认收货'
+				WHEN a.return_type = 1 THEN
+					'申请退货中'
+				WHEN a.return_type = 2 THEN
+					'同意退货'
+				WHEN a.return_type = 3 THEN
+					'拒绝退货'
+				WHEN a.return_type = 4 THEN
+					'退货成功'
+				WHEN a.return_type = 5 THEN
+					'退货失败'
+				WHEN a.return_type = 6 THEN
+					'申请退款中'
+				WHEN a.return_type = 7 THEN
+					'退款成功'
+				WHEN a.return_type = 8 THEN
+					'退款失败'
+				WHEN a.return_type = 9 THEN
+					'拒绝退款'
+				END as STATE
+				
+
+
+
+		from 
+				tb_order a left join tb_expressorder b on a.ORDER_ID=b.ORDERID 
+				left join tb_useraddress c on b.USERADDRESS_ID=c.USERADDRESS_ID 
+				left join td_area d on c.PROVINCEID=d.AREA_ID 
+				left join td_area e on c.CITYID=e.AREA_ID 
+				left join td_area f on c.AREAID=e.AREA_ID 
+				where a.ORDER_ID=#{ORDERID} 
+	</select>
+	
+	
+		<!-- 通过ID获取数据 -->
+	<select id="findByIdOrderId" parameterType="pd" resultType="pd">
+		select
+				ORDER_ID,
+				ORDERTYPE,
+				RETURN_TYPE
+		from 
+				tb_order 
+				where ORDER_ID=#{ORDERID} 
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.ORDER_ID,
+				a.SUMPRICE,
+				c.TEL,
+				c.NAME,
+				a.ORDERTYPE,
+				a.RETURN_TYPE,
+				b.EXPRESSORDER_ID,
+				b.RETURNEXPRESSAGEURL
+		from 
+				tb_order a left join tb_expressorder b on a.ORDER_ID=b.ORDERID 
+				left join tb_useraddress c on b.USERADDRESS_ID=c.USERADDRESS_ID
+				where a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+				<if test="pd.ORDER_ID !=null and pd.ORDER_ID !=''">
+				and a.ORDER_ID like CONCAT(CONCAT('%', #{pd.ORDER_ID}),'%') 
+				</if>
+				<if test="pd.NAME !=null and pd.NAME !=''">
+				and  (c.NAME like CONCAT(CONCAT('%', #{pd.NAME}),'%') or  c.TEL like CONCAT(CONCAT('%', #{pd.NAME}),'%')) 
+				</if>
+				<if test="pd.ORDERTYPE !=null and pd.ORDERTYPE !=''">
+				<if test="pd.ORDERTYPE==2">
+				and  a.ORDERTYPE =#{pd.ORDERTYPE} and a.RETURN_TYPE=0
+				</if>
+				<if test="pd.ORDERTYPE==4">
+				and  a.ORDERTYPE =#{pd.ORDERTYPE} and a.RETURN_TYPE=0
+				</if>
+				<if test="pd.ORDERTYPE==3">
+				and  a.ORDERTYPE =#{pd.ORDERTYPE} and a.RETURN_TYPE=0
+				</if>
+				</if>
+				
+				
+				<if test="pd.RETURN_TYPE!=null and pd.RETURN_TYPE!=''">
+					<if test="pd.RETURN_TYPE==10">
+					and  a.RETURN_TYPE !=0 
+					</if>
+					<if test="pd.RETURN_TYPE!=10">
+					and  a.RETURN_TYPE =#{pd.RETURN_TYPE} 
+					</if>
+				</if>
+				
+				order by a.CREATETIME desc
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.EXPRESSPRICE,	
+				a.SUMPRICE,	
+				a.ADDRESSID,	
+				a.REMARK,	
+				a.CREATEVIPID,	
+				a.CREATETIME,	
+				a.RETURNURL,	
+				a.RETURNTYPE,	
+				a.RETURN_REMARK,	
+				a.CHECK_REMARK,	
+				a.ORDERTYPE,	
+				a.RETURN_TYPE,	
+				a.FLAG,	
+				a.PAYNO,	
+				a.PAYTYPE,	
+				a.RETURNTIME,	
+				a.ORDER_ID
+		from 
+				tb_order a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from tb_order
+		where 
+			ORDER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

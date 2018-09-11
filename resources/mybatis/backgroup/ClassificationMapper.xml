@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClassificationMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_CLASSIFICATION(
+			SUPERIOR,	
+			NAME,	
+			CLASSIFICATION_ID,
+			BUSINESSUSER_ID
+		) values (
+			#{SUPERIOR},	
+			#{NAME},	
+			#{CLASSIFICATION_ID},
+			#{BUSINESSUSER_ID}
+		)
+	</insert>
+	
+	<!-- 列表(全部) -->
+	<select id="listAllTh" parameterType="pd" resultType="pd">
+		select
+				a.SUPERIOR,	
+				a.NAME,	
+				a.CLASSIFICATION_ID
+		from 
+				TB_CLASSIFICATION a
+				where a.SUPERIOR=#{CLASSIFICATION_ID}  and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_CLASSIFICATION
+		where 
+			CLASSIFICATION_ID = #{CLASSIFICATION_ID}
+	</delete>
+	<!-- 删除-->
+	<delete id="delSUPERIOR" parameterType="pd">
+		delete from TB_CLASSIFICATION
+		where 
+			SUPERIOR = #{SUPERIOR}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_CLASSIFICATION
+			set 
+				SUPERIOR = #{SUPERIOR},
+				NAME = #{NAME},
+			CLASSIFICATION_ID = CLASSIFICATION_ID
+			where 
+				CLASSIFICATION_ID = #{CLASSIFICATION_ID}
+	</update>
+	<!-- 列表(全部)模版 -->
+	<select id="listAllOnemb" parameterType="pd" resultType="pd">
+		select
+				a.parent_id,	
+				a.zh,	
+				a.id
+		from 
+				dg_fenlei a
+				where a.parent_id='0' <!-- and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID} -->
+	</select>
+	<!-- 列表(全部) 模版-->
+	<select id="listAllThmb" parameterType="pd" resultType="pd">
+		select
+				a.parent_id,	
+				a.zh,	
+				a.id
+		from 
+				dg_fenlei a
+				where a.parent_id=#{id}  <!--and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}-->
+	</select>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findByIdmb" parameterType="pd" resultType="pd">
+		select 
+			parent_id,	
+				zh,	
+				id
+		from 
+			dg_fenlei
+		where 
+			id = #{id}
+	</select>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			SUPERIOR,	
+			NAME,	
+			CLASSIFICATION_ID
+		from 
+			TB_CLASSIFICATION
+		where 
+			CLASSIFICATION_ID = #{CLASSIFICATION_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				(select b.NAME from TB_CLASSIFICATION b where b.CLASSIFICATION_ID = a.SUPERIOR)as SUPERIOR,	
+				a.NAME,	
+				a.CLASSIFICATION_ID
+		from 
+				TB_CLASSIFICATION a where a.BUSINESSUSER_ID=#{pd.BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.SUPERIOR,	
+				a.NAME,	
+				a.CLASSIFICATION_ID
+		from 
+				TB_CLASSIFICATION a where a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	<!-- 列表(全部) -->
+	<select id="listAllOne" parameterType="pd" resultType="pd">
+		select
+				a.SUPERIOR,	
+				a.NAME,	
+				a.CLASSIFICATION_ID
+		from 
+				TB_CLASSIFICATION a
+				where a.SUPERIOR='0' and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+		<!-- 列表(全部) -->
+	<select id="listAllTwo" parameterType="pd" resultType="pd">
+		select
+				a.SUPERIOR,	
+				a.NAME,	
+				a.CLASSIFICATION_ID
+		from 
+				TB_CLASSIFICATION a
+				where a.SUPERIOR !='0' and a.BUSINESSUSER_ID=#{BUSINESSUSER_ID}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_CLASSIFICATION
+		where 
+			CLASSIFICATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

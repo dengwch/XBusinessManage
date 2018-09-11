@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../css/basicStyle.css" rel="stylesheet" type="text/css">
+       <link href="../css/NavigationStyle.css" rel="stylesheet" type="text/css">
+    <link href="../css/ListStyle.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .auditResult{
+            font-size: 16px;
+            color: #5aa3d0;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .againUp{
+            color: #fc4c1f;
+            text-decoration: underline;
+        }
+        .img_fail{
+            margin-bottom: 25px;
+            width: 40px;
+            height: 40px;
+        }
+        p{
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div>
+<div class="header">
+        <div class="header_left">
+            <img  class="logo" src="../images/logo.png">
+            <ul class="header_nav">
+                <li class="shopping">
+                    <p class="child_goods_p"><a href="#">商品管理</a> </p>
+                    <!--商品管理子类-->
+                    <ul class="child goodChild">
+                        <li><a href="goods.html">新增商品</a></li>
+                        <li><a href="GoodList.html">分类管理</a></li>
+                    </ul>
+                </li>
+                <li class=""><p><a href="CouponsList.html">优惠信息</a></p></li>
+                <li><p><a href="MemberCardList.html" style="color: #5aa3d0">会员卡管理</a></p></li>
+                <li>
+                    <p class="child_store_p"><a href="#">店铺设置</a></p>
+                    <!--店铺设置-->
+                    <ul class="child storeChild">
+                        <li><a href="Store.html">店铺信息</a></li>
+                        <li><a href="AccountList.html">子账号管理</a></li>
+                    </ul>
+                </li>
+                <li><p><a href="TrafficInfoList.html">流量信息</a></p></li>
+            </ul>
+        </div>
+        <div class="header_right">
+            <span class="userName">你好，月野兔！</span>
+            <img src="../images/shizhi1.png">
+            <!--店铺设置-->
+            <ul class="child child_setting">
+                 <a href="password.html"><li>修改密码</li></a>
+                <li>退出账号</li>
+            </ul>
+        </div>
+    </div>
+    <p class="top"></p>
+    <div class="auditResult center_div">
+        <img src="../images/shibai.png" class="img_fail"/>
+        <p>尊敬的<span>18722331980</span>，您填写的<span>"xxxxxxxx公司"</span>信息<span>正在审核中</span></p>
+        <p><a class="againUp">请点此重新上传</a></p>
+    </div>
+    <div class="foot" style="margin-top: 50px;width: 100%;height: 80px;background: #fff;text-align: center;line-height: 60px;border-top: 5px solid rgb(90, 163, 208);color: #ccc;">
+    Copyright2015|xxxx Cc.Allright erserved 津ICP备13005847号-2
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	   $(".header_right>img ").mouseover(function(){
+	        $(".header_right>ul").fadeIn();
+	      });
+	      $(".header_right>img ").mouseout(function(){
+	          $(".header_right>ul").hide(8000);
+	        });
+});
+</script>
+</div>
+</body>
+</html>

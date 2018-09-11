@@ -1,0 +1,307 @@
+*{
+	padding:0;
+	margin: 0;
+}
+a{
+	text-decoration: none;
+}
+span,select,a,img,button,.btnSearch,input,.btnAddCoupons,.btn_div{
+	cursor:pointer;
+}
+body{
+	padding:0;
+	margin: 0;
+	font-family: "微软雅黑";
+	min-width:1280px;
+}
+.container{
+	width: 100%;
+	background: #eee;
+	padding:20px 20%;
+}
+.header_right>ul{
+	position:absolute;
+	top:40px;
+	right:100px;}
+.col-md-12 {
+	background:#fff;
+	padding: 50px 30% 50px 30%;
+}
+.col-md-12 p{
+	font-size: 14px;
+	margin-bottom: 20px;
+	line-height: 30px;
+}
+.col-md-12 p input{
+	background: #eee;
+	padding-left:12px;
+	border: 1px solid #ccc;
+	border-radius: 5px!important;
+	margin-left:5px;
+	line-height: 30px;
+	font-size:16px; 
+	margin-right: 10px;
+}
+.col-md-12 p select{
+	display:inline-block;
+	background: #eee;
+	width: 298px;
+	margin:0;
+}
+.col-md-12 p textarea{
+	background: #eee;
+	padding-left:12px;
+	width: 300px;
+	height: 100px;
+	margin-left: 78px;
+	border-radius: 5px;
+}
+#addCommodityIndex{
+	widht:100%;
+}
+.col-md-12 p span{
+	margin-left: 80px;
+	font-size: 12px;
+	line-height: 30px;
+	color: red;
+}
+.guige1{
+	margin-top: 20px;
+	background: #eee;
+	padding: 20px 40px;
+	width: 50%;
+}
+.row{
+margin-left:0!important}
+.guigename{
+	clear: both;
+	width: 100px;
+}
+.shade {
+		position: absolute;
+		display: none;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.55);
+	}
+	
+	.shade div {
+		width: 300px;
+		height: 200px;
+		line-height: 200px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -100px;
+		margin-left: -150px;
+		background: white;
+		border-radius: 5px;
+		text-align: center;
+	}
+	
+	.a-upload {
+		padding: 4px 10px;
+		line-height: 30px;
+		position: relative;
+		cursor: pointer;
+		color: #fff;
+		background: #337ab7;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		overflow: hidden;
+		*display: inline;
+		*zoom: 1
+	}
+	
+	.a-upload input {
+		position: absolute;
+		font-size: 100px;
+		right: 0;
+		top: 0;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		cursor: pointer
+	}
+	
+	.a-upload:hover {
+		color: #fff;
+		background: #337ab7;
+		border-color: #ccc;
+		text-decoration: none
+	}
+	.img_div{width:100%;}
+	.input-group{width:100%;}
+	.isImg{width: 150px; height: 120px; position: relative; float: left; margin-left: 75px;text-align:center;margin:10px 0;}
+	.isImg img{width:120px!important;margin:0 auto;}
+	.isImg2{width: 150px; height: 120px; position: relative; float: left; margin-left: 75px;text-align:center;margin:10px 0;}
+	.isImg2 img{width:120px!important;margin:0 auto;}
+	.isImg3{width: 150px; height: 120px; position: relative; float: left; margin-left: 75px;text-align:center;margin:10px 0;}
+	.isImg3 img{width:120px!important;margin:0 auto;}
+	.removeBtn{text-align:center;position: absolute; top: 0; right: 0;  border: 0px; border-radius: 50px; background: red; width: 22px; height: 22px; line-height: 22px;color: white;}
+	.shadeImg{position: absolute;
+		display: none;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 15;
+		text-align: center;
+		background: rgba(0, 0, 0, 0.55);}
+	.showImg{width: 400px; height: 500px; margin-top: 140px;}	
+	.tanchuang{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    height: 1000px;
+}
+	.tanchuang1{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    height: 1000px;
+}
+.tanchuang_1{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    height: 1000px;
+    z-index: 1050;
+}
+
+
+.tanchuang2{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    height: 1000px;
+}.tanchuang3{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    height: 1000px;
+}
+.tanchuang_1 .modal-content{
+width:50%;
+margin:20px auto 0 auto;}
+.tanchuang .xianshi{
+    width: 50%;
+    background-color: #fff;
+    margin:30px auto 0 auto;
+    border-radius: 1rem;
+    text-align: center;
+    height:400px;
+}
+.tanchuang1 .xianshi1{
+    width: 50%;
+    background-color: #fff;
+    margin:30px auto 0 auto;
+    border-radius: 1rem;
+    text-align: center;
+    height:400px;
+}
+.tanchuang2 .xianshi2{
+    width: 50%;
+    background-color: #fff;
+    margin:30px auto 0 auto;
+    border-radius: 1rem;
+    text-align: center;
+    height:400px;
+}
+.tanchuang3 .xianshi3{
+    width: 50%;
+    background-color: #fff;
+    margin:30px auto 0 auto;
+    border-radius: 1rem;
+    text-align: center;
+    height:400px;
+}
+#lunbo .item img{height:350px!important;}
+.xianshi h3{
+    border-radius: 1rem  1rem 0 0;
+    line-height: 3rem;
+    text-align: center;
+    background-color: #dd485c;
+    color: #fff;
+}
+.xianshi p{
+    font-size: 0.6rem;
+    color: #666;
+    text-align: center;
+    padding:0 5%;
+    margin:1.5rem;
+}
+.xianshi img{
+    width:400px;
+    height:400px;
+    margin: 2rem 0;
+}
+.xianshi .guanbi{
+    background-color: #cfc8c6;
+    display: block;
+    width: 100%;
+    color: #fff;
+    line-height: 3rem;
+    border-radius:0 0 1rem  1rem ;
+}
+.xianshi1 h3{
+    border-radius: 1rem  1rem 0 0;
+    line-height: 3rem;
+    text-align: center;
+    background-color: #dd485c;
+    color: #fff;
+}
+.xianshi1 p{
+    font-size: 0.6rem;
+    color: #666;
+    text-align: center;
+    padding:0 5%;
+    margin:1.5rem;
+}
+.xianshi1 img{
+    width:400px;
+    height:400px;
+    margin: 2rem 0;
+}
+.xianshi1 .guanbi{
+    background-color: #cfc8c6;
+    display: block;
+    width: 100%;
+    color: #fff;
+    line-height: 3rem;
+    border-radius:0 0 1rem  1rem ;
+}
+.xianshi2 .guanbi{
+    background-color: #cfc8c6;
+    display: block;
+    width: 100%;
+    color: #fff;
+    line-height: 3rem;
+    border-radius:0 0 1rem  1rem ;
+}
+.xianshi3 .guanbi{
+    background-color: #cfc8c6;
+    display: block;
+    width: 100%;
+    color: #fff;
+    line-height: 3rem;
+    border-radius:0 0 1rem  1rem ;
+}
+.noscroll,
+.noscroll body {
+    overflow: hidden;
+}
+.noscroll body {
+    position: relative;
+}
